@@ -1,5 +1,3 @@
+import { decoratedLogger } from "./src/decorator";
 
-import { printMessage } from "./src/printMessage";
-
-
-printMessage("Hello World! Updated!")
+decoratedLogger.log("Hello World! Updated!");
