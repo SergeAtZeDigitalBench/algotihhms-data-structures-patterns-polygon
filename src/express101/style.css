@@ -1,0 +1,8 @@
+.container > h1 {
+  color: darkgreen;
+  text-decoration: underline;
+}
+
+.container > img {
+  max-width: 200px;
+}
