@@ -6,10 +6,16 @@ import {
   incrementAsync,
   multiplyAsync,
   logAsync,
+  errorFunctionAsync,
 } from "./src/utils";
 
 compose(log, multiplyBy2, increment)({ count: 1 });
 
 console.log("\n====================\n");
 
-composeAsync(logAsync, multiplyAsync, incrementAsync)({ count: 1 });
+composeAsync(
+  logAsync,
+  errorFunctionAsync,
+  multiplyAsync,
+  incrementAsync
+)({ count: 1 });

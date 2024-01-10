@@ -13,9 +13,15 @@ export const log = (val: { count: number }) => {
   return val;
 };
 
-const wait = (timeout = 100) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, timeout);
+const wait = (timeout: number, errorMessage?: string) =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (errorMessage) {
+        reject(new Error(errorMessage));
+      } else {
+        resolve(null);
+      }
+    }, timeout);
   });
 
 const getResolvedValue = <D = any>(data: D, timeout = 100): Promise<D> =>
@@ -41,6 +47,11 @@ export const multiplyAsync = async (val: { count: number }) => {
   });
 
   return newValue;
+};
+
+export const errorFunctionAsync = async (val: { count: number }) => {
+  wait(200, "Somethng went wrong!");
+  return val;
 };
 
 export const logAsync = async (val: { count: number }) => {

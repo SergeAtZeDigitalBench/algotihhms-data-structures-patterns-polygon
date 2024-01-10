@@ -12,7 +12,18 @@ export const compose =
 export const composeAsync =
   <T = any>(...fnsAsync: FnAsyncType<T>[]) =>
   (initObjValue: T) => {
-    return fnsAsync.reduceRight(async (currentValue, currentAsyncFn) => {
-      return currentAsyncFn(await currentValue);
+    return fnsAsync.reduceRight(async (currentValue, currentAsyncFn, index) => {
+      try {
+        return currentAsyncFn(await currentValue);
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : `Composition failed at functiuon number ${
+                index + 1
+              } from the right`;
+        console.warn(message);
+        return await currentValue;
+      }
     }, Promise.resolve(initObjValue));
   };
